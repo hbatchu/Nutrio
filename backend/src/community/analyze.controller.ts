@@ -3,7 +3,6 @@ import {
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import type { File } from 'multer';
 import { extname, join } from 'path';
 import * as fs from 'fs';
 import { AnalyzeService } from './analyze.service';
@@ -21,7 +20,7 @@ export class AnalyzeController {
 
   @Post()
   @UseInterceptors(FilesInterceptor('images', 2, { storage }))
-  async analyze(@UploadedFiles() files: File[]) {
+  async analyze(@UploadedFiles() files: any[]) {
     if (!files || files.length === 0) {
       throw new BadRequestException('At least one image is required');
     }

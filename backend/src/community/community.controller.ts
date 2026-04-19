@@ -4,7 +4,6 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import type { File } from 'multer';
 import { extname, join } from 'path';
 import { CommunityService } from './community.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -26,7 +25,7 @@ export class CommunityController {
   submit(
     @Request() req: any,
     @Body() body: any,
-    @UploadedFile() file?: File,
+    @UploadedFile() file?: any,
   ) {
     return this.communityService.submit(
       req.user.id,
